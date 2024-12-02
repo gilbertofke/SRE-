@@ -1,0 +1,86 @@
+{
+    "dashboard": {
+      "id": null,
+      "uid": null,
+      "title": "Node.js Application Monitoring",
+      "timezone": "browser",
+      "schemaVersion": 36,
+      "version": 0,
+      "refresh": "5s",
+      "panels": [
+        {
+          "type": "graph",
+          "title": "CPU Usage",
+          "datasource": "Prometheus",
+          "targets": [
+            {
+              "expr": "rate(node_cpu_seconds_total{mode='user'}[1m]) * 100",
+              "legendFormat": "{{instance}}",
+              "refId": "A"
+            }
+          ],
+          "gridPos": {
+            "x": 0,
+            "y": 0,
+            "w": 12,
+            "h": 8
+          }
+        },
+        {
+          "type": "graph",
+          "title": "Memory Usage",
+          "datasource": "Prometheus",
+          "targets": [
+            {
+              "expr": "(node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100",
+              "legendFormat": "{{instance}}",
+              "refId": "A"
+            }
+          ],
+          "gridPos": {
+            "x": 12,
+            "y": 0,
+            "w": 12,
+            "h": 8
+          }
+        },
+        {
+          "type": "graph",
+          "title": "HTTP Requests Rate",
+          "datasource": "Prometheus",
+          "targets": [
+            {
+              "expr": "rate(http_requests_total[1m])",
+              "legendFormat": "{{method}} {{status}}",
+              "refId": "A"
+            }
+          ],
+          "gridPos": {
+            "x": 0,
+            "y": 8,
+            "w": 12,
+            "h": 8
+          }
+        },
+        {
+          "type": "graph",
+          "title": "Error Rate",
+          "datasource": "Prometheus",
+          "targets": [
+            {
+              "expr": "rate(http_requests_total{status=~'5..'}[1m])",
+              "legendFormat": "{{method}} {{status}}",
+              "refId": "A"
+            }
+          ],
+          "gridPos": {
+            "x": 12,
+            "y": 8,
+            "w": 12,
+            "h": 8
+          }
+        }
+      ]
+    }
+  }
+  
